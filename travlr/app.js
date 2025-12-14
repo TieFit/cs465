@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mealsRouter = require('./app_server/routes/meals');
+var newsRouter = require('./app_server/routes/news');
+var roomsRouter = require('./app_server/routes/rooms');
+var contactRouter = require('./app_server/routes/contact');
+var aboutRouter = require('./app_server/routes/about');
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
@@ -45,6 +50,11 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
+app.use('/', contactRouter);
+app.use('/', mealsRouter);
+app.use('/', newsRouter);
+app.use('/', roomsRouter);
+app.use('/', aboutRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);

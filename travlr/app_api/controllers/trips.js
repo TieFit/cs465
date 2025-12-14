@@ -118,10 +118,28 @@ const tripsUpdateTrip = async (req, res) => {
   // console.log(q);
 };
 
+// DELETE: /trips/:tripId - Deletes a trip by Mongo _id
+const tripsDeleteTrip = async (req, res) => {
+  try {
+    const tripId = req.params.tripId;
+    const deletedTrip = await Model.findByIdAndDelete(tripId).exec();
+
+    if (!deletedTrip) {
+      return res.status(404).json({ message: "Trip not found" });
+    }
+
+    // Successfully deleted
+    return res.status(204).json(null);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error", error: err });
+  }
+};
 
 module.exports = {
     tripsList,
     tripsFindByCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripsDeleteTrip
 };

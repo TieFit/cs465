@@ -24,6 +24,10 @@ export class TripDataService {
     return this.http.post<Trip>(this.url, formData);
   }
 
+  deleteTrip(tripId: string) {
+    return this.http.delete(`${this.url}/${tripId}`);
+  }
+
   getTrip(tripCode: string): Observable<Trip[]> {
     //console.log('Inside TripDataService::getTrips');
     return this.http.get<Trip[]>(this.url + '/' + tripCode);
